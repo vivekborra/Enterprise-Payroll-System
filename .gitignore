@@ -1,0 +1,41 @@
+# Java
+**/target/
+**/.mvn/wrapper/maven-wrapper.jar
+**/*.class
+**/*.jar
+**/*.war
+**/*.ear
+**/*.log
+
+# Node.js
+**/node_modules/
+**/dist/
+**/.env
+**/.env.local
+**/.env.development.local
+**/.env.test.local
+**/.env.production.local
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+**/pnpm-debug.log*
+
+# IDEs
+**/.idea/
+**/.vscode/
+**/*.iml
+**/*.ipr
+**/*.iws
+**/.settings/
+**/.externalToolBuilders/
+**/.project
+**/.classpath
+
+# OS files
+**/.DS_Store
+**/Thumbs.db
+
+# Project specifics
+**/maven.zip
+**/run_output*.txt
+**/vite_output.txt
