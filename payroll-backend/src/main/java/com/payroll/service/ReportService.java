@@ -1,7 +1,9 @@
 package com.payroll.service;
 
 import com.payroll.entity.Payroll;
+import com.payroll.entity.Employee;
 import com.payroll.repository.PayrollRepository;
+import com.payroll.repository.EmployeeRepository;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
@@ -21,6 +23,31 @@ import java.util.List;
 public class ReportService {
 
     private final PayrollRepository payrollRepository;
+    private final EmployeeRepository employeeRepository;
+
+    public byte[] generateEmployeeCsv() throws IOException {
+        List<Employee> employees = employeeRepository.findAll();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try (CSVPrinter csvPrinter = new CSVPrinter(new OutputStreamWriter(out), 
+                CSVFormat.DEFAULT.builder()
+                        .setHeader("Code", "Name", "Email", "Department", "Designation", "Joining Date", "Tax Regime")
+                        .build())) {
+
+            for (Employee e : employees) {
+                csvPrinter.printRecord(
+                        e.getEmployeeCode(),
+                        e.getUser().getName(),
+                        e.getUser().getEmail(),
+                        e.getDepartment(),
+                        e.getDesignation(),
+                        e.getJoiningDate(),
+                        e.getTaxRegime()
+                );
+            }
+            csvPrinter.flush();
+        }
+        return out.toByteArray();
+    }
 
     public byte[] generateMonthlyPayrollCsv(int month, int year) throws IOException {
         List<Payroll> payrolls = payrollRepository.findByMonthAndYear(month, year);

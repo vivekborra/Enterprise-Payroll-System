@@ -144,6 +144,50 @@ public class EmployeeService {
                 "Deactivated employee: " + user.getName(), null, null);
     }
 
+    @Transactional
+    public void createDefaultEmployee(User user) {
+        String empCode = generateEmployeeCode();
+        Employee employee = Employee.builder()
+                .employeeCode(empCode)
+                .department(Department.ENGINEERING)
+                .designation("Employee")
+                .employmentType(com.payroll.enums.EmploymentType.FULL_TIME)
+                .joiningDate(LocalDate.now())
+                .basicSalary(new BigDecimal("25000"))
+                .hra(BigDecimal.ZERO)
+                .specialAllowance(BigDecimal.ZERO)
+                .transportAllowance(BigDecimal.ZERO)
+                .medicalAllowance(BigDecimal.ZERO)
+                .bonus(BigDecimal.ZERO)
+                .taxRegime(com.payroll.enums.TaxRegime.NEW)
+                .pfContributionPercentage(new BigDecimal("12.00"))
+                .sickLeaveBalance(12)
+                .casualLeaveBalance(12)
+                .paidLeaveBalance(15)
+                .user(user)
+                .build();
+        employeeRepository.save(employee);
+        log.info("Default employee profile created for user: {} ({})", user.getEmail(), empCode);
+    }
+
+    @Transactional
+    public EmployeeResponse updateMyProfile(UUID userId, java.util.Map<String, String> updates) {
+        Employee employee = employeeRepository.findByUserId(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Profile not found"));
+
+        if (updates.containsKey("phone")) {
+            employee.setPhone(updates.get("phone"));
+        }
+        if (updates.containsKey("address")) {
+            employee.setAddress(updates.get("address"));
+        }
+
+        employee = employeeRepository.save(employee);
+        auditService.log(employee.getUser(), "UPDATE_PROFILE", "Employee", employee.getId().toString(),
+                "User updated personal info", null, null);
+        return mapToResponse(employee);
+    }
+
     private String generateEmployeeCode() {
         String prefix = "EMP" + LocalDate.now().format(DateTimeFormatter.ofPattern("yy"));
         long count = employeeRepository.count() + 1;

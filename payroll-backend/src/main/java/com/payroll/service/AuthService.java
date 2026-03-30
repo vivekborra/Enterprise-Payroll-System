@@ -29,6 +29,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
     private final JwtTokenProvider jwtTokenProvider;
     private final AuditService auditService;
     private final PasswordEncoder passwordEncoder;
@@ -87,8 +88,8 @@ public class AuthService {
 
         user = userRepository.save(user);
 
-        // Optionally associate an empty employee record or let admin handle it.
-        // For simplicity as requested, we just create the user.
+        // Create a default employee profile so the user can access the dashboard immediately
+        employeeService.createDefaultEmployee(user);
 
         auditService.log(user, "SIGNUP", "User", user.getId().toString(), "New user registered", null, null);
 

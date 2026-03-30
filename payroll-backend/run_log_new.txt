@@ -1,0 +1,50 @@
+
+D:\ADV JAVA\payroll-backend>set ERROR_CODE=0 
+
+D:\ADV JAVA\payroll-backend>set MAVEN_HOME= 
+
+D:\ADV JAVA\payroll-backend>set MAVEN_PROJECTBASEDIR= 
+
+D:\ADV JAVA\payroll-backend>set MAVEN_CONFIG= 
+
+D:\ADV JAVA\payroll-backend>if not "C:\Program Files\Java\jdk-23" == "" goto OkJavaHome 
+
+D:\ADV JAVA\payroll-backend>if exist "C:\Program Files\Java\jdk-23\bin\java.exe" goto init 
+
+D:\ADV JAVA\payroll-backend>set MAVEN_PROJECTBASEDIR= 
+
+D:\ADV JAVA\payroll-backend>if not "" == "" goto endDetectBaseDir 
+
+D:\ADV JAVA\payroll-backend>set EXEC_DIR=D:\ADV JAVA\payroll-backend 
+
+D:\ADV JAVA\payroll-backend>set WRP_DIR=D:\ADV JAVA\payroll-backend\ 
+
+D:\ADV JAVA\payroll-backend>set WRP_DIR=D:\ADV JAVA\payroll-backend 
+
+D:\ADV JAVA\payroll-backend>if exist "D:\ADV JAVA\payroll-backend\.mvn" (
+set MAVEN_PROJECTBASEDIR=D:\ADV JAVA\payroll-backend  
+ goto endDetectBaseDir 
+) 
+
+D:\ADV JAVA\payroll-backend>if not exist "D:\ADV JAVA\payroll-backend\.mvn\wrapper\maven-wrapper.jar" (
+echo. 
+ echo Error: Could not find maven-wrapper.jar in D:\ADV JAVA\payroll-backend\.mvn\wrapper  1>&2  
+ echo. 
+ goto error 
+) 
+
+D:\ADV JAVA\payroll-backend>set WRAPPER_JAR="D:\ADV JAVA\payroll-backend\.mvn\wrapper\maven-wrapper.jar" 
+
+D:\ADV JAVA\payroll-backend>set WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain 
+
+D:\ADV JAVA\payroll-backend>set MAVEN_CONFIG_FILE="D:\ADV JAVA\payroll-backend\.mvn\wrapper\maven-wrapper.properties" 
+
+D:\ADV JAVA\payroll-backend>"C:\Program Files\Java\jdk-23\bin\java.exe"  -classpath "D:\ADV JAVA\payroll-backend\.mvn\wrapper\maven-wrapper.jar" org.apache.maven.wrapper.MavenWrapperMain "D:\ADV JAVA\payroll-backend\.mvn\wrapper\maven-wrapper.properties" spring-boot:run 
+-Dmaven.multiModuleProjectDirectory system property is not set.
+D:\ADV JAVA\payroll-backend>if ERRORLEVEL 1 goto error 
+
+D:\ADV JAVA\payroll-backend>set ERROR_CODE=1 
+
+D:\ADV JAVA\payroll-backend>if not "" == "on" goto mainEnd 
+
+D:\ADV JAVA\payroll-backend>if not "1" == "0" exit /b 1 

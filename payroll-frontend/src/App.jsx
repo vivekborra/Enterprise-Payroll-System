@@ -12,17 +12,25 @@ import EmployeeManagement from './pages/hr/EmployeeManagement';
 import PayrollManagement from './pages/hr/PayrollManagement';
 import LeavePage from './pages/LeavePage';
 import PayrollPage from './pages/PayrollPage';
-import SignupPage from './pages/SignupPage';
+import ReportsPage from './pages/hr/ReportsPage';
+import ProfilePage from './pages/ProfilePage';
 
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-    primary: { main: '#667eea' },
-    secondary: { main: '#764ba2' },
-    background: { default: '#0d1117', paper: '#161b27' },
+    primary: { main: '#a78bfa' }, // Violet 400
+    secondary: { main: '#c084fc' },
+    background: { 
+      default: '#09090b', // Deep Zinc 950
+      paper: '#18181b',   // Zinc 900
+    },
+    text: {
+      primary: '#fafafa',
+      secondary: '#a1a1aa',
+    }
   },
   typography: {
-    fontFamily: '"Inter", "Roboto", sans-serif',
+    fontFamily: '"Inter", "Outfit", "Roboto", sans-serif',
   },
   components: {
     MuiOutlinedInput: {
@@ -65,7 +73,6 @@ export default function App() {
           />
           <Routes>
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
             <Route path="/" element={<Navigate to="/login" replace />} />
 
             {/* Employee Routes */}
@@ -80,6 +87,7 @@ export default function App() {
               <Route path="dashboard" element={<EmployeeDashboard />} />
               <Route path="leaves" element={<LeavePage />} />
               <Route path="payroll" element={<PayrollPage />} />
+              <Route path="profile" element={<ProfilePage />} />
             </Route>
 
             {/* HR Routes */}
@@ -95,6 +103,8 @@ export default function App() {
               <Route path="employees" element={<EmployeeManagement />} />
               <Route path="leaves" element={<LeavePage />} />
               <Route path="payroll" element={<PayrollManagement />} />
+              <Route path="reports" element={<ReportsPage />} />
+              <Route path="profile" element={<ProfilePage />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/login" replace />} />

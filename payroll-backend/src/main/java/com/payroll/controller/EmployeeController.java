@@ -98,6 +98,17 @@ public class EmployeeController {
         return ResponseEntity.ok(ApiResponse.success(employeeService.getEmployeeByUserId(user.getId())));
     }
 
+    @PutMapping("/employee/profile")
+    @PreAuthorize("hasAnyRole('EMPLOYEE','HR','ADMIN')")
+    @Operation(summary = "Update my profile info")
+    public ResponseEntity<ApiResponse<EmployeeResponse>> updateMyProfile(
+            @RequestBody java.util.Map<String, String> updates,
+            @AuthenticationPrincipal UserDetails userDetails) {
+        User user = getUser(userDetails);
+        return ResponseEntity.ok(ApiResponse.success("Profile updated", 
+                employeeService.updateMyProfile(user.getId(), updates)));
+    }
+
     private User getUser(UserDetails userDetails) {
         return userRepository.findByEmail(userDetails.getUsername())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));

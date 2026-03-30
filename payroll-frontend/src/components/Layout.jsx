@@ -28,6 +28,7 @@ const hrNav = [
   { label: 'Leave Requests', icon: <EventNote />, path: '/hr/leaves' },
   { label: 'Payroll', icon: <AccountBalanceWallet />, path: '/hr/payroll' },
   { label: 'Reports', icon: <Assessment />, path: '/hr/reports' },
+  { label: 'My Profile', icon: <Settings />, path: '/hr/profile' },
 ];
 
 export default function Layout() {
@@ -50,7 +51,8 @@ export default function Layout() {
   const DrawerContent = () => (
     <Box sx={{
       height: '100%',
-      background: 'linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%)',
+      background: '#09090b',
+      borderRight: '1px solid rgba(255,255,255,0.06)',
       display: 'flex',
       flexDirection: 'column',
     }}>
@@ -122,16 +124,15 @@ export default function Layout() {
               <ListItemButton
                 onClick={() => { navigate(item.path); setMobileOpen(false); }}
                 sx={{
-                  borderRadius: 2,
+                  borderRadius: 2.5,
                   py: 1.2,
                   px: 1.5,
-                  background: active ? 'linear-gradient(135deg, rgba(102,126,234,0.3), rgba(118,75,162,0.3))' : 'transparent',
-                  border: active ? '1px solid rgba(102,126,234,0.3)' : '1px solid transparent',
+                  background: active ? 'rgba(167, 139, 250, 0.08)' : 'transparent',
+                  border: active ? '1px solid rgba(167, 139, 250, 0.15)' : '1px solid transparent',
                   '&:hover': {
-                    background: 'rgba(255,255,255,0.06)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    background: 'rgba(255,255,255,0.03)',
                   },
-                  transition: 'all 0.2s',
+                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}
               >
                 <ListItemIcon sx={{ color: active ? '#a78bfa' : 'rgba(255,255,255,0.5)', minWidth: 38 }}>

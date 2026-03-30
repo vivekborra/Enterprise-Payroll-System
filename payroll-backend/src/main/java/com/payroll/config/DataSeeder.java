@@ -20,8 +20,10 @@ import java.math.BigDecimal;
 public class DataSeeder implements CommandLineRunner {
 
     private final UserRepository userRepository;
+    private final com.payroll.repository.EmployeeRepository employeeRepository;
     private final TaxSlabRepository taxSlabRepository;
     private final PasswordEncoder passwordEncoder;
+    private final com.payroll.service.EmployeeService employeeService;
 
     @Override
     public void run(String... args) {
@@ -39,7 +41,14 @@ public class DataSeeder implements CommandLineRunner {
                     .active(true)
                     .build();
             userRepository.save(admin);
+            employeeService.createDefaultEmployee(admin);
             log.info("Default admin user created: admin@payroll.com / Admin@123");
+        } else {
+            User admin = userRepository.findByEmail("admin@payroll.com").get();
+            if (employeeRepository.findByUserId(admin.getId()).isEmpty()) {
+                employeeService.createDefaultEmployee(admin);
+                log.info("Default employee profile created for existing Admin user");
+            }
         }
 
         if (!userRepository.existsByEmail("hr@payroll.com")) {
@@ -51,7 +60,14 @@ public class DataSeeder implements CommandLineRunner {
                     .active(true)
                     .build();
             userRepository.save(hr);
+            employeeService.createDefaultEmployee(hr);
             log.info("Default HR user created: hr@payroll.com / Hr@12345");
+        } else {
+            User hr = userRepository.findByEmail("hr@payroll.com").get();
+            if (employeeRepository.findByUserId(hr.getId()).isEmpty()) {
+                employeeService.createDefaultEmployee(hr);
+                log.info("Default employee profile created for existing HR user");
+            }
         }
     }
 

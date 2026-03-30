@@ -21,6 +21,21 @@ public class ReportController {
 
     private final ReportService reportService;
 
+    @GetMapping("/hr/reports/employees/csv")
+    @PreAuthorize("hasAnyRole('HR','ADMIN')")
+    @Operation(summary = "Export employee directory to CSV")
+    public ResponseEntity<byte[]> exportEmployeesCsv() {
+        try {
+            byte[] data = reportService.generateEmployeeCsv();
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=employees_report.csv")
+                    .contentType(MediaType.parseMediaType("text/csv"))
+                    .body(data);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
     @GetMapping("/hr/reports/payroll/csv")
     @PreAuthorize("hasAnyRole('HR','ADMIN')")
     @Operation(summary = "Export monthly payroll to CSV")
