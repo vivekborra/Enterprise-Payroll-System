@@ -6,36 +6,53 @@ PayrollPro is a full-stack enterprise-grade Payroll & Human Resource Management 
 
 ## 📸 Screenshots
 
-> Replace these placeholders with your actual image paths
+### 🔐 Login Page
+![Login](./screenshots/login.png)
 
-- Login Page  
-  ![Login](./screenshots/login.png)
+### 📊 HR Dashboard
+![HR Dashboard](./screenshots/hr-dashboard.png)
 
-- HR Dashboard  
-  ![HR Dashboard](./screenshots/hr-dashboard.png)
+### 👥 Employee Management
+![Employees](./screenshots/employees.png)
 
-- Employee Management  
-  ![Employees](./screenshots/employees.png)
+### ➕ Add Employee Modal
+![Add Employee](./screenshots/add-employee.png)
 
-- Add Employee Modal  
-  ![Add Employee](./screenshots/add-employee.png)
+### 👤 Employee Profile
+![Profile](./screenshots/profile.png)
 
-- Employee Dashboard  
-  ![Employee Dashboard](./screenshots/employee-dashboard.png)
+### 🧑‍💼 Employee Dashboard (Initial)
+![Employee Dashboard Initial](./screenshots/employee-dashboard-empty.png)
 
-- Leave Management  
-  ![Leave](./screenshots/leave.png)
+### 📈 Employee Dashboard (After Payroll)
+![Employee Dashboard](./screenshots/employee-dashboard.png)
 
-- Leave Approval (HR)  
-  ![Leave Approval](./screenshots/leave-approval.png)
+### 🏖️ Leave Management (Empty)
+![Leave Empty](./screenshots/leave-empty.png)
 
-- Payroll Processing  
-  ![Payroll](./screenshots/payroll.png)
+### 📝 Apply Leave Modal
+![Apply Leave](./screenshots/apply-leave.png)
 
-- Payslip View  
-  ![Payslip](./screenshots/payslip.png)
+### ⏳ Leave Request (Pending)
+![Leave Pending](./screenshots/leave-pending.png)
 
----
+### ✅ Leave Approval (HR)
+![Leave Approval](./screenshots/leave-approval.png)
+
+### ✔️ Leave Approved State
+![Leave Approved](./screenshots/leave-approved.png)
+
+### 💰 Payroll Processing
+![Payroll](./screenshots/payroll.png)
+
+### 📊 Employee Dashboard (Final with Salary)
+![Employee Dashboard Final](./screenshots/dashboard-final.png)
+
+### 📄 Payslip UI
+![Payslip UI](./screenshots/payslip-ui.png)
+
+### 🧾 Generated Payslip PDF
+![Payslip PDF](./screenshots/payslip-pdf.png)
 
 ## 🚀 Project Overview
 
