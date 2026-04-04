@@ -1,94 +1,233 @@
-# 🏢 PayrollPro — Enterprise Payroll & Tax Processing System
+# 💼 PayrollPro - Enterprise Payroll & Tax System
 
-> **Full-Stack Production-Ready System** | Spring Boot 3 + React + MySQL
-
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.3-6DB33F?logo=springboot)](https://spring.io/projects/spring-boot)
-[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)](https://reactjs.org)
-[![Java](https://img.shields.io/badge/Java-23-ED8B00?logo=openjdk)](https://openjdk.org/projects/jdk/23/)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql)](https://mysql.com)
+PayrollPro is a full-stack enterprise-grade Payroll & Human Resource Management System designed to automate employee lifecycle management, payroll processing, and Indian tax computations. It eliminates manual HR operations by providing a centralized, secure, and scalable digital platform.
 
 ---
 
-## 📋 Overview
+## 📸 Screenshots
 
-PayrollPro is a comprehensive enterprise solution for automated salary calculations, leave management, and Indian income tax compliance. It features a **Premium Dark Hub UI** designed with modern glassmorphism and real-time data visualizations.
+> Replace these placeholders with your actual image paths
 
----
+- Login Page  
+  ![Login](./screenshots/login.png)
 
-## ✨ Features
+- HR Dashboard  
+  ![HR Dashboard](./screenshots/hr-dashboard.png)
 
-### 🔐 Secure Architecture
-- **JWT Authentication**: Secure stateless authentication with refresh token logic.
-- **Role-Based Access (RBAC)**: Distinct portals for **Employee**, **HR Manager**, and **System Admin**.
-- **HR-Only Registration**: Removed public signup to ensure organizational integrity.
+- Employee Management  
+  ![Employees](./screenshots/employees.png)
 
-### 👤 Employee Self-Service (ESS)
-- **Interactive Dashboard**: Real-time KPI charts and salary growth stats.
-- **Smart Profile**: Self-service updates for personal contact details (Address & Phone).
-- **Dynamic Payslips**: View and download automated monthly payslips in PDF format.
-- **Leave Desk**: Apply for leaves, track balances, and view approval status.
+- Add Employee Modal  
+  ![Add Employee](./screenshots/add-employee.png)
 
-### 🏢 HR & Administrative Control
-- **Employee Directory**: Centralized management of specialized employee profiles.
-- **Global Payroll Run**: One-click payroll processing for the entire organization.
-- **Automatic Tax Compliance**: Built-in tax engines for both **Old and New Indian Tax Regimes (FY 2024-25)**.
-- **Decision Engine**: Streamlined approval workflow for leave applications.
+- Employee Dashboard  
+  ![Employee Dashboard](./screenshots/employee-dashboard.png)
 
-### 🎨 Premium Aesthetics
-- **Antigravity Dark Mode**: Deep Zinc-Black theme with Violet accents.
-- **Glassmorphism UI**: High-blur backdrops and animated background orbs for a high-end feel.
-- **Responsive Design**: Fully optimized for Desktop, Tablet, and Mobile.
+- Leave Management  
+  ![Leave](./screenshots/leave.png)
 
----
+- Leave Approval (HR)  
+  ![Leave Approval](./screenshots/leave-approval.png)
 
-## 🏗️ Tech Stack
+- Payroll Processing  
+  ![Payroll](./screenshots/payroll.png)
 
-| Layer | Technology |
-|-------|------------|
-| **Backend** | Spring Boot 3.2.3, Spring Security 6, JPA/Hibernate |
-| **Frontend** | React 18, Vite, Redux Toolkit |
-| **Styling** | Material UI (MUI) v5, Vanilla CSS3 (Custom Glassmorphism) |
-| **Database** | MySQL 8.0 (Optimized indexing for large datasets) |
-| **Visualization** | Recharts (Responsive SVG charts) |
-| **Reporting** | jsPDF (Dynamic PDF generation) |
+- Payslip View  
+  ![Payslip](./screenshots/payslip.png)
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Project Overview
 
-### 🔧 Backend Environment
-1. **Database**: Create `payroll_db` in MySQL.
-2. **Properties**: Configure `src/main/resources/application.properties`.
-3. **Run**:
-   ```bash
-   cd payroll-backend
-   ./mvnw spring-boot:run
-   ```
+PayrollPro is built using a modern **full-stack architecture** where the backend serves as a stateless REST API and the frontend acts as a responsive Single Page Application (SPA). The system supports three primary roles:
 
-### 🖥️ Frontend Environment
-1. **Install**: `npm install`
-2. **Run**: `npm run dev`
-3. **Visit**: `http://localhost:5173`
+- **Admin**
+- **HR Manager**
+- **Employee**
+
+Each role has isolated access through **Role-Based Access Control (RBAC)** ensuring security, data privacy, and clear separation of responsibilities.
 
 ---
 
-## 📊 Business Logic: Indian Tax Engine
-The system automatically calculates deductions based on:
-- **New Tax Regime (Default)**: Slabs starting from 5% up to 30%, including standard deduction of ₹75,000.
-- **Old Tax Regime**: Supports full 80C deductions (handled via backend persistence).
-- **Surcharge & Cess**: Automatic application of 4% Health & Education Cess.
-- **EPF Calculation**: 12% contribution with statutory ceilings.
+## 🧠 Core Features
+
+### 👥 Employee Lifecycle Management
+- Create, update, and manage employee records
+- Store critical financial data (PAN, Aadhaar, UAN, Bank Details)
+- Automatic leave allocation on onboarding
+- Department & designation mapping
+
+### 🏖️ Leave Management System
+- Employees can apply for leave with date validation
+- Automatic calculation excluding weekends
+- Real-time leave balance tracking
+- HR approval/rejection workflow
+- Prevents over-utilization of leave
+
+### 💰 Intelligent Payroll Engine
+- One-click monthly payroll processing
+- Automatic salary computation based on attendance
+- Loss of Pay (LOP) deduction handling
+- Dynamic allowance and deduction calculation
+
+### 🇮🇳 Indian Tax Computation
+- Supports both **Old and New Tax Regimes**
+- Section 87A rebate handling
+- Standard deductions (₹50,000 / ₹75,000)
+- Tax slab calculations (5%–30%)
+- 4% Health & Education Cess
+
+### 📊 Dashboard & Analytics
+- HR dashboard with real-time insights
+- Employee dashboard with salary breakdown
+- Visual charts using Recharts
+- Payroll trends and department distribution
+
+### 📄 Payslip Generation
+- Dynamic PDF payslip generation
+- Detailed earnings & deductions breakdown
+- Downloadable and printable format
 
 ---
 
-## 📑 Default Demo Credentials
+## 🏗️ Architecture
 
-| Role | Email | Password |
-|------|-------|----------|
-| **Admin** | `admin@payroll.com` | `Admin@123` |
-| **HR Manager** | `hr@payroll.com` | `Hr@12345` |
+PayrollPro follows a **decoupled API-driven monolithic architecture**:
+
+- Backend → Handles business logic & security
+- Frontend → Handles UI rendering
+- Communication → REST APIs (JSON)
+
+This ensures scalability, maintainability, and independent development cycles.
 
 ---
 
-## 📄 License
-Internal Enterprise License — Unauthorized distribution is prohibited.
+## ⚙️ Tech Stack
+
+### 🔹 Backend
+- **Java 17 / 20**
+- **Spring Boot 3**
+- **Spring Security 6**
+- **JWT Authentication**
+- **Hibernate (JPA)**
+- **MySQL 8**
+- **Lombok**
+- **MapStruct**
+- **iTextPDF (PDF generation)**
+
+### 🔹 Frontend
+- **React 19**
+- **Vite**
+- **Redux Toolkit**
+- **React Router DOM**
+- **Material UI (MUI)**
+- **Axios (with interceptors)**
+- **Recharts**
+
+---
+
+## 🔐 Authentication & Security
+
+- Stateless authentication using **JWT tokens**
+- Password hashing using **BCrypt**
+- Role-based authorization (Admin, HR, Employee)
+- Secure API endpoints via Spring Security filters
+- Token validation on every request
+
+---
+
+## 🔄 Workflow Overview
+
+### 1️⃣ Employee Onboarding
+- HR creates employee profile
+- System assigns leave balances
+- User account is generated automatically
+
+### 2️⃣ Leave Application
+- Employee submits leave request
+- Backend validates leave balance & dates
+- HR approves/rejects request
+- Leave balance updated automatically
+
+### 3️⃣ Payroll Processing
+- HR triggers monthly payroll
+- System calculates:
+  - Working days
+  - LOP (Loss of Pay)
+  - Allowances
+  - Deductions (PF, PT, TDS)
+- Net salary is computed
+
+### 4️⃣ Payslip Generation
+- Payslip generated dynamically
+- Employees can download PDF anytime
+
+---
+
+## 📊 Database Design
+
+- Relational schema using **MySQL**
+- Strong data integrity via foreign keys
+- Efficient joins for payroll + leave + tax data
+- Optimized queries using JPA repositories
+
+---
+
+## 🎨 UI/UX Highlights
+
+- Modern **Glassmorphism dark theme**
+- Responsive design
+- Clean dashboard layouts
+- Smooth navigation (SPA)
+- Real-time UI updates via Redux
+
+---
+
+## 🔌 API Communication
+
+- Axios used for API calls
+- Global interceptors automatically attach JWT tokens
+- Centralized error handling
+- Clean separation of API services
+
+---
+
+## 📈 Performance & Optimization
+
+- Vite enables ultra-fast frontend builds
+- MapStruct avoids runtime reflection overhead
+- Hibernate optimizes database interaction
+- Stateless backend improves scalability
+
+---
+
+## 🛠️ Setup Instructions
+
+### ⚡ 1-Click Start (Windows)
+We provide a convenient PowerShell script to start both servers simultaneously:
+```powershell
+cd "d:\ADV JAVA"
+.\start.ps1
+```
+
+### ⚙️ Manual Setup
+
+**Backend Setup**
+```bash
+cd payroll-backend
+# Ensure JAVA_HOME is pointing to JDK 17+
+mvn clean install
+mvn spring-boot:run
+```
+
+**Frontend Setup**
+```bash
+cd payroll-frontend
+npm install
+npm run dev
+```
+
+**Database Configuration**
+Ensure MySQL is running on port 3306. The application will automatically create the `payroll_db` schema. Update the credentials in `application.properties` as needed.
+
+*The application UI will become available at `http://localhost:5173`.*
