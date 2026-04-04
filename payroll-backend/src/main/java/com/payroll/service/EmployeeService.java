@@ -31,7 +31,6 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AuditService auditService;
 
     @Transactional
     public EmployeeResponse createEmployee(CreateEmployeeRequest req, User adminUser) {
@@ -76,8 +75,6 @@ public class EmployeeService {
                 .build();
         employee = employeeRepository.save(employee);
 
-        auditService.log(adminUser, "CREATE_EMPLOYEE", "Employee", employee.getId().toString(),
-                "Created employee: " + req.getName(), null, null);
         log.info("Employee created: {} ({})", req.getName(), empCode);
 
         return mapToResponse(employee);
@@ -126,10 +123,6 @@ public class EmployeeService {
         user.setName(req.getName());
         userRepository.save(user);
 
-        employee = employeeRepository.save(employee);
-        auditService.log(adminUser, "UPDATE_EMPLOYEE", "Employee", employeeId.toString(),
-                "Updated employee: " + employee.getUser().getName(), null, null);
-
         return mapToResponse(employee);
     }
 
@@ -139,9 +132,6 @@ public class EmployeeService {
                 .orElseThrow(() -> new ResourceNotFoundException("Employee", "id", employeeId));
         User user = employee.getUser();
         user.setActive(false);
-        userRepository.save(user);
-        auditService.log(adminUser, "DEACTIVATE_EMPLOYEE", "Employee", employeeId.toString(),
-                "Deactivated employee: " + user.getName(), null, null);
     }
 
     @Transactional
@@ -182,9 +172,6 @@ public class EmployeeService {
             employee.setAddress(updates.get("address"));
         }
 
-        employee = employeeRepository.save(employee);
-        auditService.log(employee.getUser(), "UPDATE_PROFILE", "Employee", employee.getId().toString(),
-                "User updated personal info", null, null);
         return mapToResponse(employee);
     }
 

@@ -11,10 +11,7 @@ import com.payroll.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.payroll.dto.request.SignupRequest;
-import com.payroll.enums.Role;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -29,10 +26,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final EmployeeRepository employeeRepository;
-    private final EmployeeService employeeService;
     private final JwtTokenProvider jwtTokenProvider;
-    private final AuditService auditService;
-    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public AuthResponse login(LoginRequest request) {
@@ -55,7 +49,6 @@ public class AuthService {
         userRepository.save(user);
 
         Optional<Employee> employee = employeeRepository.findByUserId(user.getId());
-        auditService.log(user, "LOGIN", "User", user.getId().toString(), "User logged in", null, null);
 
         return AuthResponse.builder()
                 .accessToken(accessToken)
@@ -73,37 +66,10 @@ public class AuthService {
     }
 
     @Transactional
-    public AuthResponse signup(SignupRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new BusinessException("Email already exists");
-        }
-
-        User user = User.builder()
-                .name(request.getName())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.EMPLOYEE)
-                .active(true)
-                .build();
-
-        user = userRepository.save(user);
-
-        // Create a default employee profile so the user can access the dashboard immediately
-        employeeService.createDefaultEmployee(user);
-
-        auditService.log(user, "SIGNUP", "User", user.getId().toString(), "New user registered", null, null);
-
-        // Auto-login after signup
-        LoginRequest loginRequest = new LoginRequest(request.getEmail(), request.getPassword());
-        return login(loginRequest);
-    }
-
-    @Transactional
     public void logout(String email) {
         userRepository.findByEmail(email).ifPresent(user -> {
             user.setRefreshToken(null);
             userRepository.save(user);
-            auditService.log(user, "LOGOUT", "User", user.getId().toString(), "User logged out", null, null);
         });
     }
 }

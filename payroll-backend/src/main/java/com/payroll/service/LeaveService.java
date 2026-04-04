@@ -30,8 +30,6 @@ public class LeaveService {
 
     private final LeaveRepository leaveRepository;
     private final EmployeeRepository employeeRepository;
-    private final EmailService emailService;
-    private final AuditService auditService;
 
     @Transactional
     public LeaveResponse applyLeave(UUID userId, LeaveRequest request) {
@@ -63,7 +61,6 @@ public class LeaveService {
                 .build();
         leave = leaveRepository.save(leave);
 
-        emailService.sendLeaveApplicationNotification(employee, leave);
         return mapToResponse(leave);
     }
 
@@ -82,9 +79,6 @@ public class LeaveService {
         leave.setApprovedAt(LocalDateTime.now());
         leaveRepository.save(leave);
 
-        emailService.sendLeaveApprovalNotification(leave.getEmployee(), leave, true, null);
-        auditService.log(approver, "APPROVE_LEAVE", "Leave", leaveId.toString(),
-                "Approved leave for: " + leave.getEmployee().getUser().getName(), null, null);
         return mapToResponse(leave);
     }
 
@@ -103,9 +97,6 @@ public class LeaveService {
         leave.setApprovedAt(LocalDateTime.now());
         leaveRepository.save(leave);
 
-        emailService.sendLeaveApprovalNotification(leave.getEmployee(), leave, false, reason);
-        auditService.log(approver, "REJECT_LEAVE", "Leave", leaveId.toString(),
-                "Rejected leave for: " + leave.getEmployee().getUser().getName(), null, null);
         return mapToResponse(leave);
     }
 

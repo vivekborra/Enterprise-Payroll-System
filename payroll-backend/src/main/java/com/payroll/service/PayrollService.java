@@ -35,8 +35,6 @@ public class PayrollService {
     private final EmployeeRepository employeeRepository;
     private final LeaveRepository leaveRepository;
     private final TaxSlabRepository taxSlabRepository;
-    private final EmailService emailService;
-    private final AuditService auditService;
 
     private static final String CURRENT_FY = "2024-25";
 
@@ -136,9 +134,6 @@ public class PayrollService {
                 .build();
 
         payroll = payrollRepository.save(payroll);
-        emailService.sendSalaryCreditNotification(employee, payroll);
-        auditService.log(admin, "PROCESS_PAYROLL", "Payroll", payroll.getId().toString(),
-                "Processed payroll for " + employee.getEmployeeCode() + " - " + month + "/" + year, null, null);
 
         return mapToResponse(payroll);
     }

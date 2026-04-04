@@ -82,7 +82,7 @@ set WRAPPER_LAUNCHER=org.apache.maven.wrapper.MavenWrapperMain
 
 set MAVEN_CONFIG_FILE="%MAVEN_PROJECTBASEDIR%\.mvn\wrapper\maven-wrapper.properties"
 
-"%JAVA_HOME%\bin\java.exe" %MAVEN_OPTS% -classpath %WRAPPER_JAR% %WRAPPER_LAUNCHER% %MAVEN_CONFIG_FILE% %*
+"%JAVA_HOME%\bin\java.exe" %MAVEN_OPTS% "-Dmaven.multiModuleProjectDirectory=." -classpath %WRAPPER_JAR% %WRAPPER_LAUNCHER% %MAVEN_CONFIG_FILE% %*
 if ERRORLEVEL 1 goto error
 goto end
 

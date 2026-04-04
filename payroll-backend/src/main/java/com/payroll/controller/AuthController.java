@@ -1,7 +1,6 @@
 package com.payroll.controller;
 
 import com.payroll.dto.request.LoginRequest;
-import com.payroll.dto.request.SignupRequest;
 import com.payroll.dto.response.ApiResponse;
 import com.payroll.dto.response.AuthResponse;
 import com.payroll.service.AuthService;
@@ -27,13 +26,6 @@ public class AuthController {
     public ResponseEntity<ApiResponse<AuthResponse>> login(@Valid @RequestBody LoginRequest request) {
         AuthResponse response = authService.login(request);
         return ResponseEntity.ok(ApiResponse.success("Login successful", response));
-    }
-
-    @PostMapping("/signup")
-    @Operation(summary = "Register a new user")
-    public ResponseEntity<ApiResponse<AuthResponse>> signup(@Valid @RequestBody SignupRequest request) {
-        AuthResponse response = authService.signup(request);
-        return ResponseEntity.ok(ApiResponse.success("User registered successfully", response));
     }
 
     @PostMapping("/logout")
